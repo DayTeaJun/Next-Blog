@@ -1,9 +1,8 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/layout/provider/themeProvider';
-
-const inter = Inter({ subsets: ['latin'] });
+import Header from '@/layout/Header';
+import Footer from '@/layout/Footer';
 
 export const metadata: Metadata = {
   title: 'Next Blog',
@@ -17,14 +16,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className="h-full flex flex-col">
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <Header />
+          <main className="flex flex-1 flex-col mt-[80px]">{children}</main>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>

@@ -1,7 +1,10 @@
-import React from 'react';
+
+import React from 'react'
 
 function Slug() {
-  return <div>page</div>;
+  return (
+    <div>page</div>
+  )
 }
 
-export default Slug;
+export default Slug
