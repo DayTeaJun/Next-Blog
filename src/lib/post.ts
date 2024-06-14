@@ -4,6 +4,7 @@ import dayjs from 'dayjs';
 import matter from 'gray-matter';
 import readingTime from 'reading-time';
 import { sync } from 'glob';
+import { PostMatter } from '@/config/types';
 
 const BASE_PATH = path.join('src', 'posts');
 const POSTS_PATH = path.join(process.cwd(), BASE_PATH);
@@ -36,7 +37,7 @@ export const parsePostPathToUrl = (postPath: string) => {
 const parsePostDetail = async (postPath: string) => {
   const file = fs.readFileSync(postPath, 'utf8');
   const { data, content } = matter(file);
-  const grayMatter = data;
+  const grayMatter = data as PostMatter;
   const readingMinutes = Math.ceil(readingTime(content).minutes);
   const dateString = dayjs(grayMatter.date)
     .locale('ko')
