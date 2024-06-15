@@ -10,7 +10,6 @@ interface Props {
 }
 
 const PostCard = ({ post }: Props) => {
-  console.log(post);
   return (
     <li
       key={post.url}

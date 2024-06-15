@@ -6,7 +6,7 @@ function Header() {
     <header className=" fixed w-full flex items-center justify-center border-b shadow-lg z-50  bg-inherit">
       <nav className=" flex flex-row w-full max-w-[900px] h-[80px] justify-between items-center">
         <div className="flex items-center text-lg font-medium">
-          <Link href="/blog">Next - Blog</Link>
+          <Link href="/">Next - Blog</Link>
         </div>
 
         <div>

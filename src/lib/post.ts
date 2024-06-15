@@ -28,7 +28,7 @@ export const parsePostPathToUrl = (postPath: string) => {
   console.log(categoryPath, slug);
 
   // /blog/category1/title1
-  const url = `/blog/${categoryPath}/${slug}`;
+  const url = `/${categoryPath}/${slug}`;
 
   return { url, categoryPath, slug };
 };
