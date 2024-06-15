@@ -1,5 +1,7 @@
-import Image from 'next/image';
+import PostList from '@/components/postList/PostList';
 
-export default function Blog() {
-  return <main></main>;
-}
+const Blog = async () => {
+  return <PostList />;
+};
+
+export default Blog;
