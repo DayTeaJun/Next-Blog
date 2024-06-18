@@ -16,6 +16,15 @@ const parsePost = async (postPath: string) => {
   return { ...postAbstract, ...postDetail };
 };
 
+export const getAllPosts = () => {
+  const postPaths: string[] = sync(`${POSTS_PATH}/**/*.mdx`);
+  return postPaths.map((path) => {
+    return {
+      slug: path.slice(path.indexOf(BASE_PATH)).replace('.mdx', ''),
+    };
+  });
+};
+
 export const parsePostPathToUrl = (postPath: string) => {
   // category1/title1/content
   const filePath = postPath
