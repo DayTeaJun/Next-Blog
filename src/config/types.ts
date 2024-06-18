@@ -13,3 +13,9 @@ export interface Post extends PostMatter {
   content: string;
   readingMinutes: number;
 }
+
+export interface CategoryDetail {
+  dirName: string;
+  publicName: string;
+  count: number;
+}

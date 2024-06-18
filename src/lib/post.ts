@@ -4,7 +4,7 @@ import dayjs from 'dayjs';
 import matter from 'gray-matter';
 import readingTime from 'reading-time';
 import { sync } from 'glob';
-import { PostMatter } from '@/config/types';
+import { CategoryDetail, PostMatter } from '@/config/types';
 
 const BASE_PATH = path.join('src', 'posts');
 const POSTS_PATH = path.join(process.cwd(), BASE_PATH);
@@ -56,4 +56,33 @@ export const getPostList = async (category?: string) => {
   const paths: string[] = getPostPaths(category);
   const posts = await Promise.all(paths.map((postPath) => parsePost(postPath)));
   return posts;
+};
+
+export const getCategoryPublicName = (dirPath: string) =>
+  dirPath
+    .split('_')
+    .map((token) => token[0].toUpperCase() + token.slice(1, token.length))
+    .join(' ');
+
+export const getCategoryDetailList = async () => {
+  const postList = await getPostList();
+  const result: { [key: string]: number } = {};
+  for (const post of postList) {
+    const category = post.categoryPath;
+    if (result[category]) {
+      result[category] += 1;
+    } else {
+      result[category] = 1;
+    }
+  }
+  const detailList: CategoryDetail[] = Object.entries(result).map(
+    ([category, count]) => ({
+      dirName: category,
+      publicName: getCategoryPublicName(category),
+      count,
+    })
+  );
+  console.log(detailList);
+
+  return detailList;
 };
