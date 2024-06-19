@@ -95,3 +95,9 @@ export const getCategoryDetailList = async () => {
 
   return detailList;
 };
+
+export const getPostDetail = async (category: string, slug: string) => {
+  const filePath = `${POSTS_PATH}/${category}/${slug}/content.mdx`;
+  const detail = await parsePost(filePath);
+  return detail;
+};
