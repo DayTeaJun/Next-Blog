@@ -53,6 +53,19 @@ const config = {
           foreground: 'hsl(var(--card-foreground))',
         },
       },
+      typography: {
+        DEFAULT: {
+          css: {
+            'h2, h3, h4': {
+              scrollMarginTop: '5rem',
+            },
+            p: {
+              marginTop: '2rem',
+              marginBottom: '2rem',
+            },
+          },
+        },
+      },
       borderRadius: {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',

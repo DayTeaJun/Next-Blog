@@ -34,7 +34,6 @@ export const parsePostPathToUrl = (postPath: string) => {
 
   // category1, title1
   const [categoryPath, slug] = filePath.split('\\');
-  console.log(categoryPath, slug);
 
   // /blog/category1/title1
   const url = `/${categoryPath}/${slug}`;
@@ -91,7 +90,6 @@ export const getCategoryDetailList = async () => {
       count,
     })
   );
-  console.log(detailList);
 
   return detailList;
 };
