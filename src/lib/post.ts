@@ -37,8 +37,9 @@ export const parsePostPathToUrl = (postPath: string) => {
 
   // /blog/category1/title1
   const url = `/${categoryPath}/${slug}`;
+  const categoryPublicName = getCategoryPublicName(categoryPath);
 
-  return { url, categoryPath, slug };
+  return { url, categoryPath, slug, categoryPublicName };
 };
 
 // MDX Detail
