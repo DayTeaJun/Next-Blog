@@ -1,0 +1,162 @@
+---
+title: 'Debounce와 Throttle에 대해'
+date: 2024-06-25
+desc: Debounce Throttle 설명 및 차이점
+thumbnail: /posts/react/Debounce_Throttle/thumbnail.png
+---
+
+## Debounc vs Throttle
+
+디바운스(Debounce)와 스로틀(Throttle) 은 자주 사용 되는 이벤트나 함수들의 실행되는 빈도를 줄여서,
+성능을 최적화할 수 있도록 만드는 방법이다.
+
+이 글은 위 두가지 방법에 대해 설명하고 차이점에 대해 알아가보고자 한다.
+
+## Debounce
+
+회원가입 기능을 만들 때, 필요한 기능이 있다.
+그것은 바로 아이디 중복검사 기능이다.
+이 기능을 처리할려면 두 가지 방법을 생각해 볼 수 있다.
+
+1. 회원가입 정보를 다 적고 난 뒤 가입 버튼을 누르면 중복검사 하기
+2. 유저의 아이디 입력이 끝난 다음 중복검사 하기
+
+당연히 UX로는 2번 방법이 좋다고 생각한다. 이럴 때 사용하기 좋은 방법이 Debounce 이다.
+
+> Debounce란 연이어 호출되는 함수들 중 마지막 함수(또는 제일 처음)만 호출하도록 하는 것
+
+쉽게 말하면 아까 말했던 2번 방법으로,
+유저가 아이디 입력하는 타이핑이 완전히 끝난 다음 서버에게 중복검사를 요청한다는 것이다.
+
+React의 Hook을 이용하여 다음과 같이 코드로 구현할 수 있다.
+
+```js {9,12,14}
+const SignUp = () => {
+  const [displayName, setDisplayName] = useState('');
+  const [debounceName, setDebounceName] = useState(displayName);
+  const [validName, setValidName] = useState(' ');
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) =>
+    setDisplayName(e.target.value);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setDebounceName(displayName), 300); // setTimeout 설정
+
+    return () => {
+      clearTimeout(timer); // clearTimeout setTimeout 타이머 제거
+    };
+  }, [displayName]); // 유저의 타이핑이 완전히 끝난 뒤 setTimeout이 실행되어 debounce가 변경
+
+  useEffect(() => {
+    if (debounceName.length > 0) {
+      // Firebase에 중복된 아이디가 있는지 검사
+      const Query = query(userRef, where('displayName', '==', debounceName));
+      getDocs(Query).then((querySnapshot) => {
+        if (querySnapshot.docs.length > 0) {
+          setValidName('중복된 닉네임입니다.');
+        } else {
+          setValidName('사용 가능한 닉네임입니다.');
+        }
+      });
+    } else {
+      setValidName('');
+    }
+  }, [debounceName, userRef]); // debounceName이 변경될 때만 서버에게 중복검사 요청
+
+  return (
+    <div className="id-Input">
+      <input value={displayName} onChange={handleChange} />
+      <span>{validName}</span>
+    </div>
+  );
+};
+```
+
+React의 useEffect와 setTimeout 함수를 사용하여 구현하고,
+debounceName이 변경될 때만 서버에게 중복검사를 요청하도록 하였다.
+이처럼 Debounce기법을 사용하면,
+기존의 유저가 타이핑할 때 마다 보내지는 요청을 타이핑이 완료된 뒤 한번만 발생하도록 최적화할 수 있다.
+
+---
+
+## Throttle
+
+Throttle은 무한 스크롤 기능을 구현하고 싶을 때 사용하면 좋은 방법이다.
+
+Throttle 또한 debounce 와 동일하게 시간 조절을 추가해서 실행 횟수를 제한한다.
+
+> Throttle이란 발생한 이벤트 수와 관계없이 지정한 시간 단위당 최대 한 번만 동작하는 함수이다.
+
+React의 Hook을 이용하여 다음과 같이 코드로 구현할 수 있다.
+
+```js
+function SearchResult({ query }: searchResultProp) {
+  const [page, setPage] = useState(1);
+  const [result, setResult] = useState < Array < any >> [];
+  const [throttle, setThrottle] = useState(false);
+
+  const handleScroll = () => {
+    // 스크롤 이벤트 발생 시
+    if (throttle) return; // throttle이 실행된 이후 true 상태면 이벤트 발생 X
+    if (!throttle) {
+      setThrottle(true); // throttle을 true로 만들고
+      setTimeout(async () => {
+        setPage((page) => page + 1);
+        setThrottle(false);
+      }, 300); // setTimeout 함수를 이용하여 0.3초 뒤에 throttle을 false로 만들어 이벤트 발생하게 함
+    }
+  };
+
+  useEffect(() => {
+    if (query.length === 0 || isEmpty || page === 0) return;
+    (async () => {
+      try {
+        const data = await getSearchResult(query, page);
+        if (data.length)
+          setResult((result) =>
+            result === data ? [...data] : [...result, ...data]
+          );
+      } catch (e) {
+        setResult([]);
+      }
+    })();
+  }, [page]);
+
+  return (
+    <SearchResultBlock onScroll={handleScroll}>
+      {result.map((data: searchDataType) => (
+        <ProductCard key={data.id} />
+      ))}
+    </SearchResultBlock>
+  );
+}
+```
+
+코드 출처 : https://velog.io/@skawnkk/debounce-throttle
+
+스크롤 이벤트가 발생하면,
+throttle의 상태에 따라 일정 시간 마다 서버에게 데이터를 요청할 수 있다.
+
+## Debounce Throttle 차이점
+
+> 차이점은 이벤트를 언제 발생 시킬지의 시점 차이이다.
+
+Debounce는 입력이 끝날 때까지 계속해서 기다리지만,
+Throttle은 입력이 시작되면, 일정 주기로 계속 실행한다.
+
+---
+
+## 결론적으로
+
+Debounce을 이용한 코드는 중복검사나 검색을 할 때 사용한다는 것을 알 수 있고,
+
+Throttle을 이용한 코드는 무한스크롤이나 리사이즈가 필요할 때 사용한다.
+
+이처럼 작업하는 기능에 따라 알맞게 사용하면 최적화에 도움을 줄 수 있다.
+
+---
+
+## 참고
+
+- https://velog.io/@skawnkk/debounce-throttle
+- https://pks2974.medium.com/throttle-%EC%99%80-debounce-%EA%B0%9C%EB%85%90-%EC%A0%95%EB%A6%AC%ED%95%98%EA%B8%B0-2335a9c426ff
