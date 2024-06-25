@@ -3,6 +3,7 @@ import React from 'react';
 import { Post } from '@/config/types';
 import remarkGfm from 'remark-gfm';
 import rehypePrettyCode from 'rehype-pretty-code';
+import remarkBreaks from 'remark-breaks';
 
 interface Props {
   post: Post;
@@ -15,7 +16,7 @@ const PostBody = ({ post }: Props) => {
       options={{
         parseFrontmatter: true,
         mdxOptions: {
-          remarkPlugins: [remarkGfm],
+          remarkPlugins: [remarkGfm, remarkBreaks],
           rehypePlugins: [rehypePrettyCode],
         },
       }}

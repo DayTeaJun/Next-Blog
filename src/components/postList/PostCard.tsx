@@ -23,7 +23,6 @@ const PostCard = ({ post }: Props) => {
             fill
             style={{
               objectFit: 'cover',
-              padding: '16px',
             }}
           />
         </div>

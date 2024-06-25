@@ -11,7 +11,7 @@ const PostList = async ({ category }: Props) => {
   const categoryList = await getCategoryDetailList();
 
   return (
-    <section className=" mx-auto w-[900px] h-[100vh] mt-8">
+    <section className=" mx-auto max-w-[900px] h-[100vh] mt-8 px-5">
       <CategoryList
         allPostCount={postList.length}
         currentCategory={category}

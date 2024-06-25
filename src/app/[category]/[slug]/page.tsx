@@ -59,7 +59,7 @@ export function generateStaticParams() {
 const Slug = async ({ params: { category, slug } }: Props) => {
   const post = await getPostDetail(category, slug);
   return (
-    <div className="prose dark:prose-invert mx-auto w-full max-w-[900px] m-6">
+    <div className="prose dark:prose-invert mx-auto w-full max-w-[900px] m-6 px-5">
       <PostHeader post={post} />
       <PostBody post={post} />
       <hr className="mt-6" />
