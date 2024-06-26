@@ -5,7 +5,7 @@ import { Metadata } from 'next';
 import React from 'react';
 
 type Props = {
-  params: { category: string; slug: string };
+	params: { category: string; slug: string };
 };
 
 // 임시도메인
@@ -16,55 +16,55 @@ export const dynamicParams = false;
 
 // 동적 메타데이터
 export async function generateMetadata({
-  params: { category, slug },
+	params: { category, slug },
 }: Props): Promise<Metadata> {
-  const post = await getPostDetail(category, slug);
+	const post = await getPostDetail(category, slug);
 
-  const title = `${post.title} | D5BL5G`;
-  const imageURL = `${baseDomain}${post.thumbnail}`;
+	const title = `${post.title} | D5BL5G`;
+	const imageURL = `${baseDomain}${post.thumbnail}`;
 
-  return {
-    title,
-    description: post.desc,
+	return {
+		title,
+		description: post.desc,
 
-    openGraph: {
-      title,
-      description: post.desc,
-      type: 'article',
-      publishedTime: post.date.toISOString(),
-      url: `${baseDomain}${post.url}`,
-      images: [imageURL],
-    },
-    twitter: {
-      title,
-      description: post.desc,
-      images: [imageURL],
-    },
-  };
+		openGraph: {
+			title,
+			description: post.desc,
+			type: 'article',
+			publishedTime: post.date.toISOString(),
+			url: `${baseDomain}${post.url}`,
+			images: [imageURL],
+		},
+		twitter: {
+			title,
+			description: post.desc,
+			images: [imageURL],
+		},
+	};
 }
 
 // SSG(정적 사이트 생성)
 // 빌드 시 모든 가능한 동적 경로의 매개변수를 반환 (ISR 방식에선 실행되지 않음)
 // 빌드 때 NextJS가 자동으로 감지하여 반환 값의 ID들을 미리 백엔드 서버에서 불러오고, 그 정보들을 빌드 타임 때 넘겨줘 미리 불러올 HTML 만든다.
 export function generateStaticParams() {
-  const postPaths: string[] = getPostPaths();
-  const paramList = postPaths
-    .map((path) => parsePostPathToUrl(path))
-    .map((item) => ({ category: item.categoryPath, slug: item.slug }));
+	const postPaths: string[] = getPostPaths();
+	const paramList = postPaths
+		.map((path) => parsePostPathToUrl(path))
+		.map((item) => ({ category: item.categoryPath, slug: item.slug }));
 
-  console.log(paramList);
-  return paramList;
+	console.log(paramList);
+	return paramList;
 }
 
 const Slug = async ({ params: { category, slug } }: Props) => {
-  const post = await getPostDetail(category, slug);
-  return (
-    <div className="prose dark:prose-invert mx-auto w-full max-w-[900px] m-6 px-5">
-      <PostHeader post={post} />
-      <PostBody post={post} />
-      <hr className="mt-6" />
-    </div>
-  );
+	const post = await getPostDetail(category, slug);
+	return (
+		<div className='prose dark:prose-invert mx-auto w-full max-w-[900px] m-6 px-5'>
+			<PostHeader post={post} />
+			<PostBody post={post} />
+			<hr className='mt-6' />
+		</div>
+	);
 };
 
 export default Slug;
