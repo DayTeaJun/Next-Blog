@@ -1,9 +1,10 @@
-import { MDXRemote } from 'next-mdx-remote/rsc';
-import React from 'react';
-import { Post } from '@/config/types';
-import remarkGfm from 'remark-gfm';
-import rehypePrettyCode from 'rehype-pretty-code';
-import remarkBreaks from 'remark-breaks';
+import { MDXRemote } from "next-mdx-remote/rsc";
+import React from "react";
+import { Post } from "@/config/types";
+import remarkGfm from "remark-gfm";
+import rehypePrettyCode from "rehype-pretty-code";
+import remarkBreaks from "remark-breaks";
+import { MdxComponents } from "@/components/mdx/mdxComponents";
 
 interface Props {
   post: Post;
@@ -17,9 +18,10 @@ const PostBody = ({ post }: Props) => {
         parseFrontmatter: true,
         mdxOptions: {
           remarkPlugins: [remarkGfm, remarkBreaks],
-          rehypePlugins: [rehypePrettyCode],
+          rehypePlugins: [[rehypePrettyCode]],
         },
       }}
+      components={MdxComponents}
     />
   );
 };
