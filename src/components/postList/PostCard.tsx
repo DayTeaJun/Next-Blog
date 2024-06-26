@@ -1,9 +1,9 @@
-import { Post } from '@/config/types';
-import Image from 'next/image';
-import Link from 'next/link';
-import React from 'react';
-import { FaRegCalendarAlt } from 'react-icons/fa';
-import { IoMdTime } from 'react-icons/io';
+import { Post } from "@/config/types";
+import Image from "next/image";
+import Link from "next/link";
+import React from "react";
+import { FaRegCalendarAlt } from "react-icons/fa";
+import { IoMdTime } from "react-icons/io";
 
 interface Props {
   post: Post;
@@ -15,14 +15,16 @@ const PostCard = ({ post }: Props) => {
       key={post.url}
       className="border  border-neutral-700 rounded-xl cursor-pointer"
     >
-      <Link className=" w-full h-full  flex flex-col gap-3" href={post.url}>
+      <Link className="h-full  flex flex-col gap-3" href={post.url}>
         <div className=" relative aspect-video bg-neutral-600 rounded-t-xl">
           <Image
             alt={post.title}
             src={post.thumbnail}
+            sizes="(max-width: 900px) 50vw, 450px"
+            priority
             fill
             style={{
-              objectFit: 'cover',
+              objectFit: "cover",
             }}
           />
         </div>

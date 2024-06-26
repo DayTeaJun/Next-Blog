@@ -1,12 +1,12 @@
-import fs from 'fs';
-import path from 'path';
-import dayjs from 'dayjs';
-import matter from 'gray-matter';
-import readingTime from 'reading-time';
-import { sync } from 'glob';
-import { CategoryDetail, PostMatter } from '@/config/types';
+import fs from "fs";
+import path from "path";
+import dayjs from "dayjs";
+import matter from "gray-matter";
+import readingTime from "reading-time";
+import { sync } from "glob";
+import { CategoryDetail, PostMatter } from "@/config/types";
 
-const BASE_PATH = path.join('src', 'posts');
+const BASE_PATH = path.join("src", "posts");
 const POSTS_PATH = path.join(process.cwd(), BASE_PATH);
 
 // MDX 파일 파싱 : abstract / detail 구분
@@ -20,7 +20,7 @@ export const getAllPosts = () => {
   const postPaths: string[] = sync(`${POSTS_PATH}/**/*.mdx`);
   return postPaths.map((path) => {
     return {
-      slug: path.slice(path.indexOf(BASE_PATH)).replace('.mdx', ''),
+      slug: path.slice(path.indexOf(BASE_PATH)).replace(".mdx", ""),
     };
   });
 };
@@ -29,11 +29,11 @@ export const parsePostPathToUrl = (postPath: string) => {
   // category1/title1/content
   const filePath = postPath
     .slice(postPath.indexOf(BASE_PATH))
-    .replace(`${BASE_PATH}\\`, '')
-    .replace('.mdx', '');
+    .replace(`${BASE_PATH}\\`, "")
+    .replace(".mdx", "");
 
   // category1, title1
-  const [categoryPath, slug] = filePath.split('\\');
+  const [categoryPath, slug] = filePath.split("\\");
 
   // /blog/category1/title1
   const url = `/${categoryPath}/${slug}`;
@@ -44,18 +44,19 @@ export const parsePostPathToUrl = (postPath: string) => {
 
 // MDX Detail
 const parsePostDetail = async (postPath: string) => {
-  const file = fs.readFileSync(postPath, 'utf8');
+  const file = fs.readFileSync(postPath, "utf8");
   const { data, content } = matter(file);
   const grayMatter = data as PostMatter;
+  console.log(grayMatter);
   const readingMinutes = Math.ceil(readingTime(content).minutes);
   const dateString = dayjs(grayMatter.date)
-    .locale('ko')
-    .format('YYYY년 MM월 DD일');
+    .locale("ko")
+    .format("YYYY년 MM월 DD일");
   return { ...grayMatter, dateString, content, readingMinutes };
 };
 
 export const getPostPaths = (category?: string) => {
-  const folder = category || '**';
+  const folder = category || "**";
   const paths: string[] = sync(`${POSTS_PATH}/${folder}/**/*.mdx`);
   return paths;
 };
@@ -69,9 +70,9 @@ export const getPostList = async (category?: string) => {
 
 export const getCategoryPublicName = (dirPath: string) =>
   dirPath
-    .split('_')
+    .split("_")
     .map((token) => token[0].toUpperCase() + token.slice(1, token.length))
-    .join(' ');
+    .join(" ");
 
 export const getCategoryDetailList = async () => {
   const postList = await getPostList();
