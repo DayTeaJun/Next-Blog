@@ -173,8 +173,9 @@ const config = {
 			},
 		},
 	},
-
+	/* eslint-disable global-require */
 	plugins: [require('tailwindcss-animate'), require('@tailwindcss/typography')],
+	/* eslint-enable global-require */
 } satisfies Config;
 
 export default config;

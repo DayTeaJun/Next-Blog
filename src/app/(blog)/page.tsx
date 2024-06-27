@@ -1,7 +1,7 @@
-import PostList from '@/components/postList/PostList';
+import PostList from '@/components/postList/PostList.tsx';
 
-const Blog = async () => {
+function Blog() {
 	return <PostList />;
-};
+}
 
 export default Blog;

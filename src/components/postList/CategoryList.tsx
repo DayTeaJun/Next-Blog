@@ -1,7 +1,8 @@
 'use client';
+
 import React from 'react';
-import CategoryButton from './CategoryButton';
-import { CategoryDetail } from '@/config/types';
+import { CategoryDetail } from '@/config/types.ts';
+import CategoryButton from './CategoryButton.tsx';
 
 interface CategoryProps {
 	categoryList: CategoryDetail[];

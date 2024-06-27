@@ -1,12 +1,12 @@
-import PostCard from '@/components/postList/PostCard';
-import { getCategoryDetailList, getPostList } from '@/lib/post';
-import CategoryList from './CategoryList';
+import PostCard from '@/components/postList/PostCard.tsx';
+import { getCategoryDetailList, getPostList } from '@/lib/post.tsx';
+import CategoryList from './CategoryList.tsx';
 
 type Props = {
 	category?: string;
 };
 
-const PostList = async ({ category }: Props) => {
+async function PostList({ category }: Props) {
 	const postList = await getPostList(category);
 	const categoryList = await getCategoryDetailList();
 
@@ -26,6 +26,6 @@ const PostList = async ({ category }: Props) => {
 			</section>
 		</section>
 	);
-};
+}
 
 export default PostList;

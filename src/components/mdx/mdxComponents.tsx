@@ -8,6 +8,8 @@ const blockquoteComponents = (props: PropsWithChildren) => {
 	);
 };
 
-export const MdxComponents = {
+const MdxComponents = {
 	blockquote: blockquoteComponents,
 };
+
+export default MdxComponents;

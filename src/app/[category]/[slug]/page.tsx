@@ -1,6 +1,6 @@
-import PostBody from '@/components/postDetail/PostBody';
-import PostHeader from '@/components/postDetail/PostHeader';
-import { getPostDetail, getPostPaths, parsePostPathToUrl } from '@/lib/post';
+import PostBody from '@/components/postDetail/PostBody.tsx';
+import PostHeader from '@/components/postDetail/PostHeader.tsx';
+import { getPostDetail, getPostPaths, parsePostPathToUrl } from '@/lib/post.ts';
 import { Metadata } from 'next';
 import React from 'react';
 
@@ -52,11 +52,10 @@ export function generateStaticParams() {
 		.map((path) => parsePostPathToUrl(path))
 		.map((item) => ({ category: item.categoryPath, slug: item.slug }));
 
-	console.log(paramList);
 	return paramList;
 }
 
-const Slug = async ({ params: { category, slug } }: Props) => {
+async function Slug({ params: { category, slug } }: Props) {
 	const post = await getPostDetail(category, slug);
 	return (
 		<div className='prose dark:prose-invert mx-auto w-full max-w-[900px] m-6 px-5'>
@@ -65,6 +64,6 @@ const Slug = async ({ params: { category, slug } }: Props) => {
 			<hr className='mt-6' />
 		</div>
 	);
-};
+}
 
 export default Slug;

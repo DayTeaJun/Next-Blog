@@ -1,12 +1,11 @@
-import PostList from '@/components/postList/PostList';
-import { getCategoryPublicName } from '@/lib/post';
+import PostList from '@/components/postList/PostList.tsx';
 
 type Props = {
 	params: { category: string };
 };
 
-const Category = async ({ params }: Props) => {
+function Category({ params }: Props) {
 	return <PostList category={params.category} />;
-};
+}
 
 export default Category;

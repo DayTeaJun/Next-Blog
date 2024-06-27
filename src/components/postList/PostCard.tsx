@@ -1,4 +1,4 @@
-import { Post } from '@/config/types';
+import { Post } from '@/config/types.ts';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
@@ -9,7 +9,7 @@ interface Props {
 	post: Post;
 }
 
-const PostCard = ({ post }: Props) => {
+function PostCard({ post }: Props) {
 	return (
 		<li
 			key={post.url}
@@ -50,6 +50,6 @@ const PostCard = ({ post }: Props) => {
 			</Link>
 		</li>
 	);
-};
+}
 
 export default PostCard;

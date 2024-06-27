@@ -1,6 +1,4 @@
-import { Post } from '@/config/types';
-import Link from 'next/link';
-import React from 'react';
+import { Post } from '@/config/types.ts';
 
 interface Props {
 	post: Post;

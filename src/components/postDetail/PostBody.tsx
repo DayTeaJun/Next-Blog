@@ -1,16 +1,16 @@
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import React from 'react';
-import { Post } from '@/config/types';
+import { Post } from '@/config/types.ts';
 import remarkGfm from 'remark-gfm';
 import rehypePrettyCode from 'rehype-pretty-code';
 import remarkBreaks from 'remark-breaks';
-import { MdxComponents } from '@/components/mdx/mdxComponents';
+import MdxComponents from '@/components/mdx/mdxComponents.ts';
 
 interface Props {
 	post: Post;
 }
 
-const PostBody = ({ post }: Props) => {
+function PostBody({ post }: Props) {
 	return (
 		<MDXRemote
 			source={post.content}
@@ -24,6 +24,6 @@ const PostBody = ({ post }: Props) => {
 			components={MdxComponents}
 		/>
 	);
-};
+}
 
 export default PostBody;

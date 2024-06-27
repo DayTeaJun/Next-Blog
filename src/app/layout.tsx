@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import { ThemeProvider } from '@/layout/provider/themeProvider';
-import Header from '@/layout/Header';
-import Footer from '@/layout/Footer';
+import ThemeProvider from '@/layout/provider/themeProvider.tsx';
+import Header from '@/layout/Header.tsx';
+import Footer from '@/layout/Footer.tsx';
 
 export const metadata: Metadata = {
 	title: 'Next Blog',
