@@ -16,9 +16,14 @@
 		"@typescript-eslint/camelcase": "off",
 		"import/extensions": ["error", "ignorePackages"],
 		"no-console": "error",
-		"prettier/prettier": "error",
 		"react/require-default-props": "off",
-		"import/no-extraneous-dependencies": ["error", { "devDependencies": true }]
+		"import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+		"prettier/prettier": [
+			"error",
+			{
+				"endOfLine": "auto"
+			}
+		]
 	},
 	"parser": "@typescript-eslint/parser",
 	"parserOptions": {
