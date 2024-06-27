@@ -1,5 +1,5 @@
 import PostCard from '@/components/postList/PostCard.tsx';
-import { getCategoryDetailList, getPostList } from '@/lib/post.tsx';
+import { getCategoryDetailList, getPostList } from '@/lib/post.ts';
 import CategoryList from './CategoryList.tsx';
 
 type Props = {
