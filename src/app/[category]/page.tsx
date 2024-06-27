@@ -1,5 +1,5 @@
 import PostList from '@/components/postList/PostList.tsx';
-import { getCategoryDetailList, getCategoryPublicName } from '@/lib/post.ts';
+import { getCategoryList, getCategoryPublicName } from '@/lib/post.ts';
 import { Metadata } from 'next';
 
 type Props = {
@@ -18,7 +18,7 @@ const blogThumbnailURL = '/posts/next/next_blog_test/thumbnail.png';
 export const dynamicParams = false;
 
 export async function generateStaticParams() {
-	const categoryList = await getCategoryDetailList();
+	const categoryList = getCategoryList();
 	const paramList = categoryList.map((category) => ({ category }));
 	return paramList;
 }

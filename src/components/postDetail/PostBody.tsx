@@ -4,7 +4,7 @@ import { Post } from '@/config/types.ts';
 import remarkGfm from 'remark-gfm';
 import rehypePrettyCode from 'rehype-pretty-code';
 import remarkBreaks from 'remark-breaks';
-import MdxComponents from '@/components/mdx/mdxComponents.ts';
+import MdxComponents from '@/components/mdx/mdxComponents.tsx';
 
 interface Props {
 	post: Post;

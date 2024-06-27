@@ -73,6 +73,13 @@ export const getPostList = async (category?: string) => {
 	return posts;
 };
 
+export const getCategoryList = () => {
+	const cgPaths: string[] = sync(`${POSTS_PATH}/*`);
+	console.log(cgPaths);
+	const cgList = cgPaths.map((paths) => paths.split('\\').slice(-1)?.[0]);
+	return cgList;
+};
+
 export const getCategoryDetailList = async () => {
 	const postList = await getPostList();
 	const result: { [key: string]: number } = {};
