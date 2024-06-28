@@ -1,3 +1,4 @@
+import Giscus from '@/components/postDetail/Giscus.tsx';
 import PostBody from '@/components/postDetail/PostBody.tsx';
 import PostHeader from '@/components/postDetail/PostHeader.tsx';
 import { getPostDetail, getPostPaths, parsePostPathToUrl } from '@/lib/post.ts';
@@ -62,6 +63,7 @@ async function Slug({ params: { category, slug } }: Props) {
 			<PostHeader post={post} />
 			<PostBody post={post} />
 			<hr className='mt-6' />
+			<Giscus />
 		</div>
 	);
 }
