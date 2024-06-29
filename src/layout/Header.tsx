@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { FaGithub } from 'react-icons/fa';
+import ThemeSwitch from './provider/ThemeSwitch.tsx';
 
 function Header() {
 	return (
@@ -9,7 +10,8 @@ function Header() {
 					<Link href='/'>Next - Blog</Link>
 				</div>
 
-				<div>
+				<div className='flex flex-row gap-5 items-center'>
+					<ThemeSwitch />
 					<Link href='https://github.com/DayTeaJun/Next-Blog'>
 						<FaGithub size={25} />
 					</Link>

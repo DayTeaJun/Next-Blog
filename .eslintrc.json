@@ -11,13 +11,14 @@
 		"next/core-web-vitals"
 	],
 	"rules": {
+		"react/jsx-props-no-spreading": 0, // "off"도 가능
 		"react/react-in-jsx-scope": "off",
 		"react/jsx-filename-extension": ["warn", { "extensions": [".ts", ".tsx"] }],
 		"@typescript-eslint/camelcase": "off",
 		"import/extensions": ["error", "ignorePackages"],
 		"no-console": "off",
 		"react/require-default-props": "off",
-		"import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+		"import/no-extraneous-dependencies": "off",
 		"prettier/prettier": [
 			"error",
 			{
