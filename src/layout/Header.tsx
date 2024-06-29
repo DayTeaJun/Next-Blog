@@ -4,9 +4,9 @@ import ThemeSwitch from './provider/ThemeSwitch.tsx';
 
 function Header() {
 	return (
-		<header className=' fixed w-full flex items-center justify-center border-b shadow-lg z-50  bg-inherit px-5'>
-			<nav className=' flex flex-row w-full max-w-[900px] h-[80px] justify-between items-center'>
-				<div className='flex items-center text-lg font-medium'>
+		<header className=' fixed w-full flex items-center justify-center shadow-lg z-50 px-5 bg-white dark:bg-[#121212]'>
+			<nav className=' flex flex-row w-full max-w-[900px] h-[80px] justify-between items-center z-50'>
+				<div className='flex items-center text-xl font-bold'>
 					<Link href='/'>Next - Blog</Link>
 				</div>
 
