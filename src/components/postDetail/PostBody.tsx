@@ -5,6 +5,7 @@ import remarkGfm from 'remark-gfm';
 import rehypePrettyCode from 'rehype-pretty-code';
 import remarkBreaks from 'remark-breaks';
 import MdxComponents from '@/components/mdx/mdxComponents.tsx';
+import rehypeSlug from 'rehype-slug';
 
 interface Props {
 	post: Post;
@@ -18,7 +19,7 @@ function PostBody({ post }: Props) {
 				parseFrontmatter: true,
 				mdxOptions: {
 					remarkPlugins: [remarkGfm, remarkBreaks],
-					rehypePlugins: [[rehypePrettyCode]],
+					rehypePlugins: [[rehypePrettyCode], rehypeSlug],
 				},
 			}}
 			components={MdxComponents}

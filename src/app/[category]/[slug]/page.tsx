@@ -1,7 +1,13 @@
 import Giscus from '@/components/postDetail/Giscus.tsx';
 import PostBody from '@/components/postDetail/PostBody.tsx';
 import PostHeader from '@/components/postDetail/PostHeader.tsx';
-import { getPostDetail, getPostPaths, parsePostPathToUrl } from '@/lib/post.ts';
+import TableOfContent from '@/components/postDetail/TableOfContent.tsx';
+import {
+	getPostDetail,
+	getPostPaths,
+	parsePostPathToUrl,
+	parseToc,
+} from '@/lib/post.ts';
 import { Metadata } from 'next';
 import React from 'react';
 
@@ -58,10 +64,14 @@ export function generateStaticParams() {
 
 async function Slug({ params: { category, slug } }: Props) {
 	const post = await getPostDetail(category, slug);
+	const toc = parseToc(post.content);
 	return (
 		<div className='prose dark:prose-invert mx-auto w-full max-w-[900px] m-6 px-5'>
 			<PostHeader post={post} />
-			<PostBody post={post} />
+			<div className=' relative'>
+				<TableOfContent toc={toc} />
+				<PostBody post={post} />
+			</div>
 			<hr className='mt-6' />
 			<Giscus />
 		</div>

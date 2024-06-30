@@ -4,7 +4,7 @@ import dayjs from 'dayjs';
 import matter from 'gray-matter';
 import readingTime from 'reading-time';
 import { sync } from 'glob';
-import { CategoryDetail, PostMatter } from '@/config/types.ts';
+import { CategoryDetail, HeadingItem, PostMatter } from '@/config/types.ts';
 
 const BASE_PATH = path.join('src', 'posts');
 const POSTS_PATH = path.join(process.cwd(), BASE_PATH);
@@ -106,4 +106,23 @@ export const getPostDetail = async (category: string, slug: string) => {
 	const filePath = `${POSTS_PATH}/${category}/${slug}/content.mdx`;
 	const detail = await parsePost(filePath);
 	return detail;
+};
+
+export const parseToc = (content: string): HeadingItem[] => {
+	const regex = /^(##|###) (.*$)/gim;
+	const headingList = content.match(regex);
+	return (
+		headingList?.map((heading: string) => ({
+			text: heading.replace('##', '').replace('#', ''),
+			link: `#${heading
+				.replace('# ', '')
+				.replace('#', '')
+				// eslint-disable-next-line
+				.replace(/[\[\]:!@#$/%^&*()+=,.]/g, '')
+				.replace(/ /g, '-')
+				.toLowerCase()
+				.replace('?', '')}`,
+			indent: (heading.match(/#/g)?.length || 2) - 2,
+		})) || []
+	);
 };

@@ -15,7 +15,7 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang='en'>
+		<html lang='en' className='h-hull scroll-smooth'>
 			<body className='h-[100vh] flex flex-col'>
 				<ThemeProvider
 					attribute='class'
