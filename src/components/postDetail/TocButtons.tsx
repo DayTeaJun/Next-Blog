@@ -1,4 +1,4 @@
-import { ArrowUpToLine, Link2 } from 'lucide-react';
+import { ArrowUpToLine, Link2, MessageSquareMore } from 'lucide-react';
 import { Button } from '../ui/button.tsx';
 
 export function Topbtn() {
@@ -33,6 +33,17 @@ export function CopyUrlBtn() {
 	return (
 		<Button variant='outline' size='icon' onClick={handleCopyUrl}>
 			<Link2 size={16} />
+		</Button>
+	);
+}
+
+export function ScrollToCommentBtn() {
+	const scrollToComment = () =>
+		document.querySelector('.giscus')?.scrollIntoView();
+
+	return (
+		<Button variant='outline' size='icon' onClick={scrollToComment}>
+			<MessageSquareMore size={16} />
 		</Button>
 	);
 }
