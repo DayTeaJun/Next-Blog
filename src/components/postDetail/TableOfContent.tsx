@@ -4,6 +4,7 @@ import Link from 'next/link';
 import cn from '@/lib/utils.ts';
 import { HeadingItem } from '@/config/types.ts';
 import useHeadingsObserver from '@/hook/useHeadingsObserver.ts';
+import { Topbtn } from './TocButtons.tsx';
 
 interface Props {
 	toc: HeadingItem[];
@@ -36,6 +37,9 @@ function TableOfContent({ toc }: Props) {
 							);
 						})}
 					</ul>
+				</div>
+				<div className='flex flex-row gap-1 px-4'>
+					<Topbtn />
 				</div>
 			</div>
 		</aside>
