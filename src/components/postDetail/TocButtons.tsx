@@ -1,4 +1,5 @@
 import { ArrowUpToLine, Link2, MessageSquareMore } from 'lucide-react';
+import { useSnackbar } from 'notistack';
 import { Button } from '../ui/button.tsx';
 
 export function Topbtn() {
@@ -16,6 +17,8 @@ export function Topbtn() {
 }
 
 export function CopyUrlBtn() {
+	const { enqueueSnackbar } = useSnackbar();
+
 	const currentUrl =
 		typeof window !== 'undefined' ? window.location.href : undefined;
 	const handleCopyUrl = () => {
@@ -23,10 +26,12 @@ export function CopyUrlBtn() {
 			navigator.clipboard
 				.writeText(currentUrl)
 				.then(() => {
-					alert('클립보드에 복사되었습니다.');
+					enqueueSnackbar('클립보드에 복사되었습니다.', { variant: 'success' });
 				})
-				.catch((error) => {
-					console.log(error);
+				.catch(() => {
+					enqueueSnackbar('클립보드에 복사에 실패하였습니다.', {
+						variant: 'error',
+					});
 				});
 	};
 
