@@ -10,6 +10,10 @@ interface BookmarkState {
 	removeBookmark: (id: string) => void;
 }
 
+const updateBookmark = (prev: (string | undefined)[], slug: string) => {
+	localStorage.slug = JSON.stringify([...prev, slug]);
+};
+
 const useBlogMarkStore = create<BookmarkState>((set) => ({
 	bookmarkList: [],
 	addBookmark: (slug) =>
@@ -20,15 +24,16 @@ const useBlogMarkStore = create<BookmarkState>((set) => ({
 			if (isDuplicate) {
 				return prev;
 			}
+			const prevSlug = prev.bookmarkList.map((bookmark) => bookmark.slug);
+
+			updateBookmark(prevSlug, slug);
 			return {
 				bookmarkList: [...prev.bookmarkList, { slug }],
 			};
 		}),
 	removeBookmark: (slug) =>
 		set((prev) => ({
-			bookmarkList: prev.bookmarkList.filter(
-				(e) => e.slug !== undefined && e.slug !== slug
-			),
+			bookmarkList: prev.bookmarkList.filter((e) => e.slug !== slug),
 		})),
 }));
 

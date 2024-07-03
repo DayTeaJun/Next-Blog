@@ -65,18 +65,25 @@ export function BookmarkBtn() {
 	const pathname = usePathname();
 
 	const addBookMark = useBlogMarkStore((state) => state.addBookmark);
+	const removeBookmark = useBlogMarkStore((state) => state.removeBookmark);
 
 	const slug = useBlogMarkStore((state) => state.bookmarkList);
 
 	const handleBoomMark = () => {
-		if (pathname) addBookMark(pathname);
-		console.log(slug);
+		if (pathname) {
+			if (slug.some((bookmark) => bookmark.slug === pathname)) {
+				removeBookmark(pathname);
+			} else {
+				addBookMark(pathname);
+				console.log(localStorage.slug);
+			}
+		}
 	};
 
 	return (
 		<Button variant='outline' size='icon' onClick={handleBoomMark}>
 			{slug.some((bookmark) => bookmark.slug === pathname) ? (
-				<BookmarkCheck />
+				<BookmarkCheck size={16} />
 			) : (
 				<Bookmark size={16} />
 			)}
