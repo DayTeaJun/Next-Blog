@@ -1,6 +1,7 @@
 import {
 	ArrowUpToLine,
 	Bookmark,
+	BookmarkCheck,
 	Link2,
 	MessageSquareMore,
 } from 'lucide-react';
@@ -74,7 +75,11 @@ export function BookmarkBtn() {
 
 	return (
 		<Button variant='outline' size='icon' onClick={handleBoomMark}>
-			<Bookmark size={16} />
+			{slug.some((bookmark) => bookmark.slug === pathname) ? (
+				<BookmarkCheck />
+			) : (
+				<Bookmark size={16} />
+			)}
 		</Button>
 	);
 }
