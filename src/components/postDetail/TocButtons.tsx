@@ -1,5 +1,12 @@
-import { ArrowUpToLine, Link2, MessageSquareMore } from 'lucide-react';
+import {
+	ArrowUpToLine,
+	Bookmark,
+	Link2,
+	MessageSquareMore,
+} from 'lucide-react';
 import { useSnackbar } from 'notistack';
+import { usePathname } from 'next/navigation';
+import useBlogMarkStore from '@/store/useBookmarkStore.ts';
 import { Button } from '../ui/button.tsx';
 
 export function Topbtn() {
@@ -49,6 +56,25 @@ export function ScrollToCommentBtn() {
 	return (
 		<Button variant='outline' size='icon' onClick={scrollToComment}>
 			<MessageSquareMore size={16} />
+		</Button>
+	);
+}
+
+export function BookmarkBtn() {
+	const pathname = usePathname();
+
+	const addBookMark = useBlogMarkStore((state) => state.addBookmark);
+
+	const slug = useBlogMarkStore((state) => state.bookmarkList);
+
+	const handleBoomMark = () => {
+		if (pathname) addBookMark(pathname);
+		console.log(slug);
+	};
+
+	return (
+		<Button variant='outline' size='icon' onClick={handleBoomMark}>
+			<Bookmark size={16} />
 		</Button>
 	);
 }

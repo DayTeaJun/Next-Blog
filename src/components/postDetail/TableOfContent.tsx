@@ -4,7 +4,12 @@ import Link from 'next/link';
 import cn from '@/lib/utils.ts';
 import { HeadingItem } from '@/config/types.ts';
 import useHeadingsObserver from '@/hook/useHeadingsObserver.ts';
-import { CopyUrlBtn, ScrollToCommentBtn, Topbtn } from './TocButtons.tsx';
+import {
+	BookmarkBtn,
+	CopyUrlBtn,
+	ScrollToCommentBtn,
+	Topbtn,
+} from './TocButtons.tsx';
 
 interface Props {
 	toc: HeadingItem[];
@@ -42,6 +47,7 @@ function TableOfContent({ toc }: Props) {
 					<Topbtn />
 					<ScrollToCommentBtn />
 					<CopyUrlBtn />
+					<BookmarkBtn />
 				</div>
 			</div>
 		</aside>
