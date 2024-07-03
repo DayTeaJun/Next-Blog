@@ -13,9 +13,17 @@ interface BookmarkState {
 const useBlogMarkStore = create<BookmarkState>((set) => ({
 	bookmarkList: [],
 	addBookmark: (slug) =>
-		set((prev) => ({
-			bookmarkList: [...prev.bookmarkList, { slug }],
-		})),
+		set((prev) => {
+			const isDuplicate = prev.bookmarkList.some(
+				(bookmark) => bookmark.slug === slug
+			);
+			if (isDuplicate) {
+				return prev;
+			}
+			return {
+				bookmarkList: [...prev.bookmarkList, { slug }],
+			};
+		}),
 	removeBookmark: (slug) =>
 		set((prev) => ({
 			bookmarkList: prev.bookmarkList.filter(
