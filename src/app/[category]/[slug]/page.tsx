@@ -9,7 +9,6 @@ import {
 	parseToc,
 } from '@/lib/post.ts';
 import { Metadata } from 'next';
-import React from 'react';
 
 type Props = {
 	params: { category: string; slug: string };
@@ -65,6 +64,7 @@ export function generateStaticParams() {
 async function Slug({ params: { category, slug } }: Props) {
 	const post = await getPostDetail(category, slug);
 	const toc = parseToc(post.content);
+
 	return (
 		<div className='prose dark:prose-invert mx-auto w-full max-w-[900px] m-6 px-5'>
 			<PostHeader post={post} />

@@ -17,8 +17,6 @@ interface Props {
 
 function TableOfContent({ toc }: Props) {
 	const activeIdList = useHeadingsObserver('h2, h3');
-	console.log(activeIdList);
-
 	return (
 		<aside className='not-prose absolute -top-[200px] left-full hidden h-full xl:block '>
 			<div className='sticky top-[200px] z-10 ml-[5rem] mt-[200px] w-[200px]'>

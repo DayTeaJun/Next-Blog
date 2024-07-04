@@ -1,3 +1,7 @@
+import React, { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
+import { useSnackbar } from 'notistack';
+import useBlogMarkStore from '@/store/useBookmarkStore.ts';
 import {
 	ArrowUpToLine,
 	Bookmark,
@@ -5,9 +9,6 @@ import {
 	Link2,
 	MessageSquareMore,
 } from 'lucide-react';
-import { useSnackbar } from 'notistack';
-import { usePathname } from 'next/navigation';
-import useBlogMarkStore from '@/store/useBookmarkStore.ts';
 import { Button } from '../ui/button.tsx';
 
 export function Topbtn() {
@@ -63,30 +64,31 @@ export function ScrollToCommentBtn() {
 
 export function BookmarkBtn() {
 	const pathname = usePathname();
-
+	const slug = useBlogMarkStore((state) => state.bookmarkList);
 	const addBookMark = useBlogMarkStore((state) => state.addBookmark);
 	const removeBookmark = useBlogMarkStore((state) => state.removeBookmark);
-
-	const slug = useBlogMarkStore((state) => state.bookmarkList);
+	const [isBookmarked, setIsBookmarked] = useState(false);
 
 	const handleBoomMark = () => {
 		if (pathname) {
-			if (slug.some((bookmark) => bookmark.slug === pathname)) {
+			if (isBookmarked) {
 				removeBookmark(pathname);
 			} else {
 				addBookMark(pathname);
-				console.log(localStorage.slug);
 			}
+			setIsBookmarked(!isBookmarked);
 		}
 	};
 
+	useEffect(() => {
+		if (pathname && slug.length > 0) {
+			setIsBookmarked(slug.some((bookmark) => bookmark === pathname));
+		}
+	}, [pathname, slug]);
+
 	return (
 		<Button variant='outline' size='icon' onClick={handleBoomMark}>
-			{slug.some((bookmark) => bookmark.slug === pathname) ? (
-				<BookmarkCheck size={16} />
-			) : (
-				<Bookmark size={16} />
-			)}
+			{isBookmarked ? <BookmarkCheck size={16} /> : <Bookmark size={16} />}
 		</Button>
 	);
 }
