@@ -1,6 +1,6 @@
 import { SnackbarKey, SnackbarProvider, useSnackbar } from 'notistack';
 import { Button } from '@/components/ui/button.tsx';
-import { CircleX } from 'lucide-react';
+import { X } from 'lucide-react';
 import { useTheme } from 'next-themes';
 
 function SnackbarCloseButton({ snackbarKey }: { snackbarKey: SnackbarKey }) {
@@ -9,10 +9,10 @@ function SnackbarCloseButton({ snackbarKey }: { snackbarKey: SnackbarKey }) {
 	return (
 		<Button
 			size='icon'
-			className=' bg-inherit text-inherit cursor-pointer hover:bg-inherit'
+			className=' bg-inherit text-inherit cursor-pointer hover:bg-inherit px-0'
 			onClick={() => closeSnackbar(snackbarKey)}
 		>
-			<CircleX size={20} />
+			<X size={20} strokeWidth={3} />
 		</Button>
 	);
 }
@@ -29,8 +29,10 @@ export default function Snackbar({ children }: { children: React.ReactNode }) {
 			autoHideDuration={3000}
 			style={{
 				fontWeight: 'bold',
-				backgroundColor: theme === 'light' ? '#121212' : '#fff',
+				backgroundColor: theme === 'light' ? '#121212' : '#ffffff',
 				color: theme === 'light' ? '#fff' : '#121212',
+				fontSize: '1rem',
+				padding: '5px 15px',
 			}}
 			action={renderSnackbarCloseButton}
 		>

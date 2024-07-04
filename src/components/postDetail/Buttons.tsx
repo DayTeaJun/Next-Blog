@@ -68,13 +68,16 @@ export function BookmarkBtn() {
 	const addBookMark = useBlogMarkStore((state) => state.addBookmark);
 	const removeBookmark = useBlogMarkStore((state) => state.removeBookmark);
 	const [isBookmarked, setIsBookmarked] = useState(false);
+	const { enqueueSnackbar } = useSnackbar();
 
 	const handleBoomMark = () => {
 		if (pathname) {
 			if (isBookmarked) {
 				removeBookmark(pathname);
+				enqueueSnackbar('북마크가 취소되었습니다.', { variant: 'success' });
 			} else {
 				addBookMark(pathname);
+				enqueueSnackbar('북마크에 등록되었습니다.', { variant: 'success' });
 			}
 			setIsBookmarked(!isBookmarked);
 		}
