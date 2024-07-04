@@ -1,4 +1,7 @@
+'use client';
+
 import { Post } from '@/config/types.ts';
+import { BookmarkBtn } from './Buttons.tsx';
 
 interface Props {
 	post: Post;
@@ -6,9 +9,12 @@ interface Props {
 
 function PostHeader({ post }: Props) {
 	return (
-		<header className='text-center'>
+		<header className='text-center  relative'>
 			<h1 className='mb-5 text-3xl'>{post.title}</h1>
-			<div className='flex justify-center gap-3 text-sm text-gray-500 dark:text-gray-400'>
+			<div className='absolute right-0 top-0'>
+				<BookmarkBtn />
+			</div>
+			<div className='flex justify-center gap-3 text-sm text-gray-500 dark:text-gray-400 '>
 				<div className='flex items-center gap-1'>
 					<span>{post.dateString}</span>
 				</div>

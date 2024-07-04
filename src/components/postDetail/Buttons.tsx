@@ -87,8 +87,8 @@ export function BookmarkBtn() {
 	}, [pathname, slug]);
 
 	return (
-		<Button variant='outline' size='icon' onClick={handleBoomMark}>
-			{isBookmarked ? <BookmarkCheck size={16} /> : <Bookmark size={16} />}
+		<Button variant='ghost' size='icon' onClick={handleBoomMark}>
+			{isBookmarked ? <BookmarkCheck size={36} /> : <Bookmark size={36} />}
 		</Button>
 	);
 }
