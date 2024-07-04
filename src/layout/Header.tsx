@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import { FaGithub } from 'react-icons/fa';
+import { Button } from '@/components/ui/button.tsx';
+import { Bookmark } from 'lucide-react';
 import ThemeSwitch from './provider/ThemeSwitch.tsx';
 
 function Header() {
@@ -11,6 +13,11 @@ function Header() {
 				</div>
 
 				<div className='flex flex-row gap-5 items-center'>
+					<Button asChild variant='ghost'>
+						<Link href='/Bookmark'>
+							<Bookmark size={25} />
+						</Link>
+					</Button>
 					<ThemeSwitch />
 					<Link href='https://github.com/DayTeaJun/Next-Blog'>
 						<FaGithub size={25} />
