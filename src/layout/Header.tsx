@@ -14,7 +14,7 @@ function Header() {
 
 				<div className='flex flex-row gap-5 items-center'>
 					<Button asChild variant='ghost'>
-						<Link href='/Bookmark'>
+						<Link href='/bookmark'>
 							<Bookmark size={25} />
 						</Link>
 					</Button>
