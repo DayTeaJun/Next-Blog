@@ -2,6 +2,7 @@ import Giscus from '@/components/postDetail/Giscus.tsx';
 import PostBody from '@/components/postDetail/PostBody.tsx';
 import PostHeader from '@/components/postDetail/PostHeader.tsx';
 import TableOfContent from '@/components/postDetail/TableOfContent.tsx';
+import { baseDomain } from '@/config/const.ts';
 import {
 	getPostDetail,
 	getPostPaths,
@@ -14,9 +15,6 @@ type Props = {
 	params: { category: string; slug: string };
 };
 
-// 임시도메인
-const baseDomain = 'https://tree-book.vercel.app/';
-
 // 정적사이트 생성(SSG)하여 빌드시점에 결정된(generateStaticParams) 다른 동적 경로를 허용하지 않음
 export const dynamicParams = false;
 
@@ -26,7 +24,7 @@ export async function generateMetadata({
 }: Props): Promise<Metadata> {
 	const post = await getPostDetail(category, slug);
 
-	const title = `${post.title} | D5BL5G`;
+	const title = `${post.title} | DayTea Blog`;
 	const imageURL = `${baseDomain}${post.thumbnail}`;
 
 	return {
