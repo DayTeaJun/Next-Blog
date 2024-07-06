@@ -31,11 +31,11 @@ export const parsePostPathToUrl = (postPath: string) => {
 	// category1/title1/content
 	const filePath = postPath
 		.slice(postPath.indexOf(BASE_PATH))
-		.replace(`${BASE_PATH}\\`, '')
+		.replace(`${BASE_PATH}${path.sep}`, '')
 		.replace('.mdx', '');
 
 	// category1, title1
-	const [categoryPath, slug] = filePath.split('\\');
+	const [categoryPath, slug] = filePath.split(path.sep);
 
 	// /blog/category1/title1
 	const url = `/${categoryPath}/${slug}`;
@@ -75,7 +75,7 @@ export const getPostList = async (category?: string) => {
 
 export const getCategoryList = () => {
 	const cgPaths: string[] = sync(`${POSTS_PATH}/*`);
-	const cgList = cgPaths.map((paths) => paths.split('\\').slice(-1)?.[0]);
+	const cgList = cgPaths.map((paths) => paths.split(path.sep).slice(-1)?.[0]);
 	return cgList;
 };
 
