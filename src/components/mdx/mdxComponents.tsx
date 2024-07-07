@@ -1,5 +1,6 @@
 import { LinkProps } from 'next/link';
 import { PropsWithChildren } from 'react';
+import { MDXComponents } from 'mdx/types';
 
 const blockquoteComponents = (props: PropsWithChildren) => {
 	return (
@@ -26,9 +27,9 @@ function ALinkComponents({
 	);
 }
 
-const MdxComponents = {
+const MdxComponents: MDXComponents = {
 	blockquote: blockquoteComponents,
-	a: ALinkComponents,
+	a: ALinkComponents as any,
 };
 
 export default MdxComponents;
