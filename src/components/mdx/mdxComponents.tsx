@@ -1,3 +1,4 @@
+import { LinkProps } from 'next/link';
 import { PropsWithChildren } from 'react';
 
 const blockquoteComponents = (props: PropsWithChildren) => {
@@ -8,8 +9,26 @@ const blockquoteComponents = (props: PropsWithChildren) => {
 	);
 };
 
+function ALinkComponents({
+	children,
+	href,
+	...props
+}: PropsWithChildren<LinkProps>) {
+	return (
+		<a
+			{...props}
+			target='_blank'
+			href={href.toString() || ''}
+			className='break-words font-bold text-cyan-800 no-underline underline-offset-2 hover:underline'
+		>
+			{children}
+		</a>
+	);
+}
+
 const MdxComponents = {
 	blockquote: blockquoteComponents,
+	a: ALinkComponents,
 };
 
 export default MdxComponents;
