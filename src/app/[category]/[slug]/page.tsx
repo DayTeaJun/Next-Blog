@@ -1,7 +1,8 @@
 import Giscus from '@/components/postDetail/Giscus.tsx';
 import PostBody from '@/components/postDetail/PostBody.tsx';
 import PostHeader from '@/components/postDetail/PostHeader.tsx';
-import TableOfContent from '@/components/postDetail/TableOfContent.tsx';
+import TableOfContentSidebar from '@/components/postDetail/TableOfContentSidebar.tsx';
+import TableOfContentTop from '@/components/postDetail/TableOfContentTop.tsx';
 import { baseDomain } from '@/config/const.ts';
 import {
 	getPostDetail,
@@ -66,8 +67,9 @@ async function Slug({ params: { category, slug } }: Props) {
 	return (
 		<div className='prose dark:prose-invert mx-auto w-full max-w-[900px] m-6 px-5'>
 			<PostHeader post={post} />
+			<TableOfContentTop toc={toc} />
 			<div className=' relative'>
-				<TableOfContent toc={toc} />
+				<TableOfContentSidebar toc={toc} />
 				<PostBody post={post} />
 			</div>
 			<hr className='mt-6' />

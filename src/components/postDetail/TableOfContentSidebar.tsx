@@ -10,7 +10,7 @@ interface Props {
 	toc: HeadingItem[];
 }
 
-function TableOfContent({ toc }: Props) {
+function TableOfContentSidebar({ toc }: Props) {
 	const activeIdList = useHeadingsObserver('h2, h3');
 	return (
 		<aside className='not-prose absolute -top-[200px] left-full hidden h-full xl:block '>
@@ -46,4 +46,4 @@ function TableOfContent({ toc }: Props) {
 	);
 }
 
-export default TableOfContent;
+export default TableOfContentSidebar;
