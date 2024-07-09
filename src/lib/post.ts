@@ -73,6 +73,8 @@ export const getPostList = async (category?: string) => {
 	return posts;
 };
 
+export const getAllPostCount = async () => (await getPostList()).length;
+
 export const getCategoryList = () => {
 	const cgPaths: string[] = sync(`${POSTS_PATH}/*`);
 	const cgList = cgPaths.map((paths) => paths.split(path.sep).slice(-1)?.[0]);

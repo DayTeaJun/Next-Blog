@@ -1,5 +1,9 @@
 import PostCard from '@/components/postList/PostCard.tsx';
-import { getCategoryDetailList, getPostList } from '@/lib/post.ts';
+import {
+	getAllPostCount,
+	getCategoryDetailList,
+	getPostList,
+} from '@/lib/post.ts';
 import CategoryList from './CategoryList.tsx';
 
 type Props = {
@@ -9,11 +13,12 @@ type Props = {
 async function PostList({ category }: Props) {
 	const postList = await getPostList(category);
 	const categoryList = await getCategoryDetailList();
+	const allPostCount = await getAllPostCount();
 
 	return (
 		<section className=' mx-auto w-full max-w-[900px] mt-8 px-5'>
 			<CategoryList
-				allPostCount={postList.length}
+				allPostCount={allPostCount}
 				currentCategory={category}
 				categoryList={categoryList}
 			/>
