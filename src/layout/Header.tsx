@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { FaGithub } from 'react-icons/fa';
 import { Button } from '@/components/ui/button.tsx';
 import { Bookmark } from 'lucide-react';
+import ScrollProgressBar from '@/components/ui/ScrollProgressBar.tsx';
 import ThemeSwitch from './provider/ThemeSwitch.tsx';
 
 function Header() {
@@ -24,6 +25,7 @@ function Header() {
 					</Link>
 				</div>
 			</nav>
+			<ScrollProgressBar />
 		</header>
 	);
 }
